@@ -1,0 +1,20 @@
+# IDEs
+.buildpath
+.project
+.settings
+.build
+.idea
+
+# OS generated files
+desktop.ini
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Build files
+/build
+
+# Composer
+/vendor
+/composer.lock
