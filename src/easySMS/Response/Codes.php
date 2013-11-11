@@ -23,5 +23,6 @@ class Codes
     const AUTHENTICATION_FAILED = 'An error occured during authentication';
     const OUT_OF_CREDIT = 'Out of credit';
     const SMS_SENDING_FAILED = 'SMS sending failed';
-    const SMS_SENT_SUCCESSFULLY = 'SMS was successfully sent';
+    const SMS_SENT_SUCCESSFULLY = 'SMS was sent successfully';
+    const OTHER_ERROR = 'An other error occured';
 } 
