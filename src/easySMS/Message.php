@@ -68,13 +68,9 @@ class Message
      * Returns the recipient.
      *
      * @return string
-     * @throws \RuntimeException When no recipient was set
      */
     public function getTo()
     {
-        if (is_null($this->to)) {
-            throw new \RuntimeException('No recipient was set');
-        }
         return $this->to;
     }
 
@@ -101,13 +97,9 @@ class Message
      * Returns the sender.
      *
      * @return string
-     * @throws \RuntimeException When no sender was set
      */
     public function getFrom()
     {
-        if (is_null($this->from)) {
-            throw new \RuntimeException('No sender was set');
-        }
         return $this->from;
     }
 
@@ -134,13 +126,9 @@ class Message
      * Returns the message text.
      *
      * @return string
-     * @throws \RuntimeException When no message was set
      */
     public function getMessageText()
     {
-        if (is_null($this->messageText)) {
-            throw new \RuntimeException('No message text was set');
-        }
         return $this->messageText;
     }
 

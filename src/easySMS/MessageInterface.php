@@ -29,7 +29,6 @@ interface MessageInterface
      * Returns the recipient.
      *
      * @return string
-     * @throws \RuntimeException When no recipient was set
      */
     public function getTo();
 
@@ -49,7 +48,6 @@ interface MessageInterface
      * Returns the sender.
      *
      * @return string
-     * @throws \RuntimeException When no sender was set
      */
     public function getFrom();
 
@@ -69,7 +67,6 @@ interface MessageInterface
      * Returns the message text.
      *
      * @return string
-     * @throws \RuntimeException When no message was set
      */
     public function getMessageText();
 

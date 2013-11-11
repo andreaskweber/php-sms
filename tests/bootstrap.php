@@ -9,5 +9,6 @@
  * with this source code in the file LICENSE.
  */
 
+// get autoloader
 $loader = require __DIR__.'/../vendor/autoload.php';
 $loader->add('easySMS\Tests', __DIR__);
