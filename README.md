@@ -41,6 +41,8 @@ var_dump($response);
 
 ## Developer
 
+### Use development environment
+
 Boot development environment:
 
 ```
@@ -60,7 +62,8 @@ cd /var/php-sms
 vendor/bin/phpunit src/Test/
 ```
 
-[ANT](http://ant.apache.org/) targets:
+### [ANT](http://ant.apache.org/) targets:
+
 ```
 vagrant@andreas-weber:/var/php-sms$ ant
 Buildfile: /var/php-sms/build.xml
