@@ -15,14 +15,42 @@ Simply add a dependency on `andreas-weber/php-sms` to your project's `composer.j
 ## Usage
 
 ```
-tbd
+use AndreasWeber\SMS\Core\Gateway;
+use AndreasWeber\SMS\Core\Gateway\Adapter\SMSTrade;
+use AndreasWeber\SMS\Core\Message;
+
+// create gateway
+$gateway = new Gateway(
+    new SMSTrade('XXXXXXXXXXXX'),
+    true
+);
+
+// create message
+$message = new Message(
+    '+49160123456789',
+    'php-sms',
+    'Hello, how are you?'
+);
+
+// send message
+$response = $gateway->send($message);
+
+// print response
+var_dump($response);
 ```
 
 ## Developer
 
-Run tests
+Boot development environment:
 
 ```
+vagrant up
+```
+
+Run tests:
+
+```
+cd /var/php-sms
 vendor/bin/phpunit src/Test/ 
 ```
 
