@@ -1,5 +1,7 @@
 # andreas-weber/php-sms
 
+[![Build Status](https://travis-ci.org/andreas-weber/php-sms.svg?branch=master)](https://travis-ci.org/andreas-weber/php-sms)
+
 SMS library for PHP 5.3+.
 
 ## Supported sms providers
