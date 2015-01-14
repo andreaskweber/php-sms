@@ -10,7 +10,7 @@ Check shipped composer.json.
 
 ## Installation
 
-Simply add a dependency on `andreas-weber/php-sms` to your project's `composer.json` file if you use [Composer](http://getcomposer.org/) to manage the dependencies of your project.
+Simply add a dependency on `andreas-weber/php-sms` to your project's [Composer](http://getcomposer.org/) `composer.json` file.
 
 ## Usage
 
