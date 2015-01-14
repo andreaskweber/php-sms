@@ -43,7 +43,7 @@ var_dump($response);
 
 ## Developer
 
-### Development environment
+### Environment
 
 Boot:
 
