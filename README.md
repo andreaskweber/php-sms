@@ -56,11 +56,11 @@ vagrant ssh
 Run tests:
 
 ```
-vagrant@andreas-weber:~$ cd /var/php-sms
-vagrant@andreas-weber:/var/php-sms$ vendor/bin/phpunit src/Test/
+cd /var/php-sms
+vendor/bin/phpunit src/Test/
 ```
 
-[ANT}(http://ant.apache.org/) targets:
+[ANT](http://ant.apache.org/) targets:
 ```
 vagrant@andreas-weber:/var/php-sms$ ant
 Buildfile: /var/php-sms/build.xml
@@ -106,4 +106,4 @@ help:
 ```
 
 ## Thoughts
-Pull requests appreciated. Built with love. Hope you'll enjoy.. :-)
+Pull requests are highly appreciated. Built with love. Hope you'll enjoy.. :-)
