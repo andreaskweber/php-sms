@@ -1,0 +1,37 @@
+#
+# Environment
+#
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+    config.vm.box = "chef/debian-7.4"
+    config.vm.box_url = "chef/debian-7.4"
+
+    config.vm.synced_folder  "./", "/var/php-sms", id: "vagrant-root", :nfs => true
+    config.ssh.forward_agent = true
+
+    config.vm.provider :virtualbox do |virtualbox|
+        virtualbox.customize ["modifyvm", :id, "--memory", 1024]
+    end
+
+    config.vm.provision "shell", path: "resources/vagrant/provision.sh"
+    config.vm.provision :puppet do |puppet|
+        puppet.manifests_path = "resources/vagrant/puppet/manifests"
+        puppet.module_path = "resources/vagrant/puppet/modules"
+        puppet.manifest_file = "site.pp"
+        puppet.hiera_config_path = "resources/vagrant/puppet/hiera.yaml"
+        puppet.options = "--parser future"
+    end
+
+    config.vm.define "core" do |core|
+        core.vm.host_name = "andreas-weber.php-sms.dev"
+        core.vm.network "private_network", ip: "192.168.56.101"
+
+        core.vm.provider :virtualbox do |virtualbox|
+            virtualbox.customize ["modifyvm", :id, "--name", "andreas-weber.php-sms.dev"]
+        end
+    end
+
+end

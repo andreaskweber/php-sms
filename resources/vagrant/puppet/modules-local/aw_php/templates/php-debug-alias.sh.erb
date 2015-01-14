@@ -1,0 +1,4 @@
+#!/bin/sh
+
+alias php-debug-on='export XDEBUG_CONFIG="remote_enable=1 profiler_enable=0 idekey=xdebug remote_host=`expr "$SSH_CLIENT" : "\(^[0-9.]*\)"`";'
+alias php-debug-off='unset XDEBUG_CONFIG;'

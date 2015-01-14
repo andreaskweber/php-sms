@@ -1,33 +1,34 @@
 {
-    "name": "easySMS/easySMS",
-    "description": "SMS sending library for PHP",
+    "name": "andreas-weber/php-sms",
+    "description": "SMS library for PHP",
     "type": "library",
+    "homepage": "https://github.com/andreas-weber/php-sms",
     "license": "MIT",
     "authors": [
         {
             "name": "Andreas Weber",
-            "email": "weber@webmanufaktur-weber.de",
+            "email": "code@andreas-weber.me",
             "role": "lead"
         }
     ],
     "support": {
-        "issues": "https://github.com/andreas-weber/easySMS/issues"
+        "issues": "https://github.com/andreas-weber/php-sms/issues"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/andreas-weber/easySMS"
-        }
-    ],
+    "minimum-stability": "stable",
     "require": {
-        "php": ">=5.4.20"
+        "php": ">=5.3",
+        "ext-curl": "0.0.0.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "~3.7"
+        "phpunit/phpunit": "~4.4",
+        "squizlabs/php_codesniffer": "~2.1",
+        "phpmd/phpmd": "~2.1",
+        "sebastian/phpcpd": "~2.0",
+        "phploc/phploc": "~2.0"
     },
     "autoload": {
-        "psr-0": {
-            "easySMS": "src/"
+        "psr-4": {
+            "AndreasWeber\\SMS\\": "src/"
         }
     }
 }
