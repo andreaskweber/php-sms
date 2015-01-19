@@ -11,7 +11,11 @@ mod 'example42/puppi',      '2.1.10'
 mod 'example42/timezone',   '2.0.11'
 
 #
-# Modules from Github
+# Modules from GitHub
 #
 
+mod 'aw_branding',          :git => 'https://github.com/andreas-weber/puppet-branding.git'
+mod 'aw_packages',          :git => 'https://github.com/andreas-weber/puppet-packages.git'
+mod 'aw_time',              :git => 'https://github.com/andreas-weber/puppet-time.git'
+mod 'aw_editor',            :git => 'https://github.com/andreas-weber/puppet-editor.git'
 mod 'composer',             :git => 'https://github.com/andreas-weber/puppet-composer.git'
