@@ -18,4 +18,5 @@ mod 'aw_branding',          :git => 'https://github.com/andreas-weber/puppet-bra
 mod 'aw_packages',          :git => 'https://github.com/andreas-weber/puppet-packages.git'
 mod 'aw_time',              :git => 'https://github.com/andreas-weber/puppet-time.git'
 mod 'aw_editor',            :git => 'https://github.com/andreas-weber/puppet-editor.git'
+mod 'aw_php',               :git => 'https://github.com/andreas-weber/puppet-php.git'
 mod 'composer',             :git => 'https://github.com/andreas-weber/puppet-composer.git'

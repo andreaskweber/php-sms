@@ -13,7 +13,10 @@ node default
 
   class { 'aw_time': }
 
-  class { 'aw_php': }
+  class { 'aw_php':
+    development   => true,
+    remove_apache => true
+  }
 
   class { 'composer': }
 }
