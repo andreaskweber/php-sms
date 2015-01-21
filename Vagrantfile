@@ -9,7 +9,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.box = "chef/debian-7.4"
     config.vm.box_url = "chef/debian-7.4"
 
-    config.vm.synced_folder  "./", "/var/php-sms", id: "vagrant-root", :nfs => true
     config.ssh.forward_agent = true
 
     config.vm.provider :virtualbox do |virtualbox|

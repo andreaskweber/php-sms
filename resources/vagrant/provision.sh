@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export DEBIAN_FRONTEND=noninteractive
-BASE_PATH='/var/php-sms'
+BASE_PATH='/vagrant'
 
 echo '[provision] Starting shell provisioning';
 

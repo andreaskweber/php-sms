@@ -60,15 +60,15 @@ vagrant ssh
 Run tests:
 
 ```
-cd /var/php-sms
+cd /vagrant
 vendor/bin/phpunit src/Test/
 ```
 
 ### Build targets
 
 ```
-vagrant@andreas-weber:/var/php-sms$ ant
-Buildfile: /var/php-sms/build.xml
+vagrant@andreas-weber:/vagrant$ ant
+Buildfile: /vagrant/build.xml
 
 help:
      [echo]

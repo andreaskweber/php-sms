@@ -2,7 +2,7 @@
 :backends:
   - yaml
 :yaml:
-  :datadir: '/var/php-sms/resources/vagrant'
+  :datadir: '/vagrant/resources/vagrant'
 :hierarchy:
   - config
 :logger: console
