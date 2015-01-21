@@ -18,5 +18,10 @@ node default
     remove_apache => true
   }
 
-  class { 'composer': }
+  class { 'aw_composer': }
+
+  #aw_composer::token { 'vagrant':
+  #  home_dir => '/home/vagrant',
+  #  token    => 'enter_your_github_oauth_token_here'
+  #}
 }

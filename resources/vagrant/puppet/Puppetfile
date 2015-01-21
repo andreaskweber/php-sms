@@ -19,4 +19,4 @@ mod 'aw_packages',          :git => 'https://github.com/andreas-weber/puppet-pac
 mod 'aw_time',              :git => 'https://github.com/andreas-weber/puppet-time.git'
 mod 'aw_editor',            :git => 'https://github.com/andreas-weber/puppet-editor.git'
 mod 'aw_php',               :git => 'https://github.com/andreas-weber/puppet-php.git'
-mod 'composer',             :git => 'https://github.com/andreas-weber/puppet-composer.git'
+mod 'aw_composer',          :git => 'https://github.com/andreas-weber/puppet-composer.git'
