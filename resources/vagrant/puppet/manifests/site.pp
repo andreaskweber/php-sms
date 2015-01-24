@@ -13,6 +13,8 @@ node default
 
   class { 'aw_time': }
 
+  class { 'aw_apt_dotdeb': }
+
   class { 'aw_php':
     development   => true,
     remove_apache => true
