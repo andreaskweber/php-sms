@@ -27,19 +27,26 @@ class Message
      * @var string Message text
      */
     private $messageText;
-    
+
+    /**
+     * @var array Options
+     */
+    private $options = array();
+
     /**
      * __construct()
      *
      * @param string $recipient Recipient
      * @param string $sender Sender
      * @param string $messageText Message text
+     * @param array $options
      */
-    public function __construct($recipient, $sender, $messageText)
+    public function __construct($recipient, $sender, $messageText, array $options = array())
     {
         $this->setTo($recipient);
         $this->setFrom($sender);
         $this->setMessageText($messageText);
+        $this->setOptions($options);
     }
 
     /**
@@ -58,7 +65,7 @@ class Message
         $this->to = $recipient;
         return $this;
     }
-    
+
     /**
      * Returns the recipient.
      *
@@ -68,7 +75,7 @@ class Message
     {
         return $this->to;
     }
-    
+
     /**
      * Sets the sender.
      *
@@ -95,7 +102,7 @@ class Message
     {
         return $this->from;
     }
-    
+
     /**
      * Sets the message text.
      *
@@ -112,7 +119,7 @@ class Message
         $this->messageText = $messageText;
         return $this;
     }
-    
+
     /**
      * Returns the message text.
      *
@@ -121,5 +128,29 @@ class Message
     public function getMessageText()
     {
         return $this->messageText;
+    }
+
+    /**
+     * Returns the options.
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * Sets the options.
+     *
+     * @param array $options
+     *
+     * @return $this
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = $options;
+
+        return $this;
     }
 }
