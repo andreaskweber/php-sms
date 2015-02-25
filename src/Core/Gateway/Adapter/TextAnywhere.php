@@ -55,14 +55,13 @@ class TextAnywhere extends AdapterAbstract
         $this->soapClient = new \SoapClient(self::WSDL);
     }
 
-
     /**
      * Sends a message through the gateway.
      *
      * @param Message $message Message
      * @param bool $debug If debug mode should be enabled
      *
-     * @return \AndreasWeber\SMS\Core\Response
+     * @return Response
      */
     public function send(Message $message, $debug = false)
     {
