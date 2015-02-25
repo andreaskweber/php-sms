@@ -6,6 +6,7 @@ SMS library for PHP 5.3+.
 
 ## Supported sms providers
 - [SMSTrade](http://www.smstrade.de/)
+- [TextAnywhere](http://www.textanywhere.de/)
 
 ## Requirements
 Check shipped composer.json.
