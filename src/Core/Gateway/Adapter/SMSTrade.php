@@ -62,7 +62,7 @@ class SMSTrade extends AdapterAbstract
      * Sends a message through the gateway.
      *
      * @param Message $message Message
-     * @param bool    $debug If debug mode should be enabled
+     * @param bool    $debug   If debug mode should be enabled
      *
      * @return \AndreasWeber\SMS\Core\Response
      * @throws \RuntimeException
@@ -71,12 +71,12 @@ class SMSTrade extends AdapterAbstract
     {
         // gather arguments
         $params = array(
-            'key'     => $this->apiKey,
-            'to'      => $message->getTo(),
+            'key' => $this->apiKey,
+            'to' => $message->getTo(),
             'message' => $message->getMessageText(),
-            'route'   => $this->route,
-            'from'    => $message->getFrom(),
-            'debug'   => $debug ? 1 : 0
+            'route' => $this->route,
+            'from' => $message->getFrom(),
+            'debug' => $debug ? 1 : 0
         );
 
         // build request
@@ -102,6 +102,19 @@ class SMSTrade extends AdapterAbstract
 
         // return response
         return $response;
+    }
+
+    /**
+     * Fetches all queued messages from gateway.
+     *
+     * @param string $number The number to fetch messages from
+     *
+     * @return null
+     * @throws Exception
+     */
+    public function fetch($number)
+    {
+        throw new Exception('Fetching messages from SMSTrade-Gateway not supported.');
     }
 
     /**

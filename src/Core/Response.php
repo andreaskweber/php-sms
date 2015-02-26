@@ -36,10 +36,10 @@ class Response
     /**
      * __construct()
      *
-     * @param int  $tstamp Timestamp
+     * @param int  $tstamp     Timestamp
      * @param bool $successful Was successful
-     * @param null $code Response code
-     * @param null $message Message
+     * @param null $code       Response code
+     * @param null $message    Message
      *
      * @throws \InvalidArgumentException
      */
@@ -64,7 +64,7 @@ class Response
     {
         return $this->timestamp;
     }
-    
+
     /**
      * Returns the gateway response code.
      *

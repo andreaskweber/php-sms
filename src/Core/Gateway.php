@@ -12,6 +12,7 @@
 namespace AndreasWeber\SMS\Core;
 
 use AndreasWeber\SMS\Core\Gateway\AdapterInterface;
+use Assert\Assertion;
 
 class Gateway
 {
@@ -47,9 +48,7 @@ class Gateway
      */
     public function setDebugMode($state)
     {
-        if (!is_bool($state)) {
-            throw new \InvalidArgumentException();
-        }
+        Assertion::boolean($state);
 
         $this->debugMode = $state;
         return $this;
@@ -68,5 +67,19 @@ class Gateway
             $message,
             $this->debugMode
         );
+    }
+
+    /**
+     * Fetches all queued messages from gateway.
+     *
+     * @param string $number The number to fetch messages from
+     *
+     * @return Message[]
+     */
+    public function fetch($number)
+    {
+        Assertion::string($number);
+
+        return $this->adapter->fetch($number);
     }
 }

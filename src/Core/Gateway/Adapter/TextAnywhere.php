@@ -59,18 +59,16 @@ class TextAnywhere extends AdapterAbstract
      * Sends a message through the gateway.
      *
      * @param Message $message Message
-     * @param bool $debug If debug mode should be enabled
+     * @param bool    $debug   If debug mode should be enabled
      *
      * @return Response
      */
     public function send(Message $message, $debug = false)
     {
-        $sc = $this->soapClient;
+        Assertion::boolean($debug);
 
-        $params = new \stdClass();
-        $params->returnCSVString = false;
-        $params->externalLogin = $this->username;
-        $params->password = $this->password;
+        $params = $this->createParamsInstance();
+
         $params->originator = $message->getFrom();
         $params->destinations = $message->getTo();
         $params->body = $message->getMessageText();
@@ -86,47 +84,148 @@ class TextAnywhere extends AdapterAbstract
             $method = 'SendSMS';
         }
 
-        $response = $this->parseXmlResponse(
-            $method,
-            $sc->__call($method, array($params))
+        $result = $this->call($method, $params);
+        $meta = $this->extractResponseMetaData($result);
+
+        $response = new Response(
+            time(),
+            $meta['code'] === 1,
+            $meta['code'],
+            $meta['message']
         );
 
         return $response;
     }
 
     /**
-     * Parse the gateways xml response.
+     * Fetches all queued messages from gateway.
      *
-     * @param string $method
-     * @param \stdClass $response
+     * @param string $number The number to fetch messages from
      *
-     * @return Response
+     * @return Message[]
+     * @throws Exception When fetching messages failed
      */
-    private function parseXmlResponse($method, \stdClass $response)
+    public function fetch($number)
     {
-        $method = $method . 'Result';
-        $xml = simplexml_load_string($response->$method);
+        Assertion::string($number);
 
-        $time = time();
-        $code = (int)$xml->Transaction->Code;
-        $message = (string)$xml->Transaction->Description;
-        $success = (int)$code === 1;
+        $params = $this->createParamsInstance();
+        $params->number = $number;
 
-        $response = new Response(
-            $time,
-            $success,
-            $code,
-            $message
+        $xml = $this->call('GetSMSInbound', $params);
+        $meta = $this->extractResponseMetaData($xml);
+
+        if ($meta['code'] === 3) {
+            // no messages in queue
+            return array();
+        }
+
+        if ($meta['code'] !== 1) {
+            throw new Exception(
+                sprintf(
+                    'An error occured while fetching messages: %s - %s',
+                    $meta['code'],
+                    $meta['message']
+                )
+            );
+        }
+
+        $messages = array();
+        foreach ($xml->SMSInbounds->InboundSMS as $sms) {
+            $dateTime = \DateTime::createFromFormat(
+                'Y-m-d H:i:s',
+                (string)$sms->Date . ' ' . (string)$sms->Time
+            );
+
+            $message = new Message(
+                (string)$sms->Destination,
+                (string)$sms->Originator,
+                (string)$sms->Body,
+                array(
+                    'timestamp' => $dateTime->getTimestamp()
+                )
+            );
+
+            $messages[] = $message;
+        }
+
+        return $messages;
+    }
+
+    /**
+     * Creates a new params instance.
+     *
+     * @return \stdClass
+     */
+    private function createParamsInstance()
+    {
+        $params = new \stdClass();
+        $params->returnCSVString = false;
+        $params->externalLogin = $this->username;
+        $params->password = $this->password;
+
+        return $params;
+    }
+
+    /**
+     * Call gateway.
+     *
+     * @param string    $method
+     * @param \stdClass $params
+     *
+     * @return \SimpleXMLElement
+     */
+    private function call($method, \stdClass $params)
+    {
+        $xml = $this->parseXmlResponse(
+            $method,
+            $this->soapClient->__call($method, array($params))
         );
 
-        return $response;
+        return $xml;
+    }
+
+    /**
+     * Parse an xml gateway response.
+     *
+     * @param string    $method Method name
+     * @param \stdClass $xml    Api response
+     *
+     * @return \SimpleXMLElement
+     * @throws \RuntimeException When xml couldn't be parsed
+     */
+    private function parseXmlResponse($method, \stdClass $xml)
+    {
+        $method = $method . 'Result';
+        $xml = simplexml_load_string($xml->$method);
+
+        if (!$xml instanceof \SimpleXMLElement) {
+            throw new \RuntimeException('Could not parse response xml.');
+        }
+
+        return $xml;
+    }
+
+    /**
+     * Extract the response meta data from given xml api response.
+     *
+     * @param \SimpleXMLElement $xml
+     *
+     * @return array
+     */
+    private function extractResponseMetaData(\SimpleXMLElement $xml)
+    {
+        return array(
+            'code' => (int)$xml->Transaction->Code,
+            'message' => (string)$xml->Transaction->Description,
+        );
     }
 
     /**
      * Sets options to params instance.
      *
      * @param \stdClass $params
-     * @param Message $message
+     * @param Message   $message
      *
      * @return Message
      */

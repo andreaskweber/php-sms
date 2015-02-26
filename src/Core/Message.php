@@ -36,10 +36,10 @@ class Message
     /**
      * __construct()
      *
-     * @param string $recipient Recipient
-     * @param string $sender Sender
+     * @param string $recipient   Recipient
+     * @param string $sender      Sender
      * @param string $messageText Message text
-     * @param array $options
+     * @param array  $options
      */
     public function __construct($recipient, $sender, $messageText, array $options = array())
     {

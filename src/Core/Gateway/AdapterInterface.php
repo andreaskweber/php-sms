@@ -11,6 +11,7 @@
 
 namespace AndreasWeber\SMS\Core\Gateway;
 
+use AndreasWeber\SMS\Core\Response;
 use AndreasWeber\SMS\Core\Message;
 
 interface AdapterInterface
@@ -19,9 +20,18 @@ interface AdapterInterface
      * Sends a message through the gateway.
      *
      * @param Message $message Message
-     * @param bool             $debug If debug mode should be enabled
+     * @param bool    $debug   If debug mode should be enabled
      *
-     * @return \AndreasWeber\SMS\Core\Response
+     * @return Response
      */
     public function send(Message $message, $debug = false);
+
+    /**
+     * Fetches all queued messages from gateway.
+     *
+     * @param string $number The number to fetch messages from
+     *
+     * @return Message[]
+     */
+    public function fetch($number);
 }

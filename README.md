@@ -8,6 +8,11 @@ SMS library for PHP 5.3+.
 - [SMSTrade](http://www.smstrade.de/)
 - [TextAnywhere](http://www.textanywhere.de/)
 
+## Features
+
+- Send messages
+- Receive messages (only if gateway supports inbound messages)
+
 ## Requirements
 Check shipped composer.json.
 
@@ -16,6 +21,8 @@ Check shipped composer.json.
 Simply add a dependency on `andreas-weber/php-sms` to your project's [Composer](http://getcomposer.org/) `composer.json` file.
 
 ## Usage
+
+### Send a message
 
 ```
 use AndreasWeber\SMS\Core\Gateway;
@@ -40,6 +47,25 @@ $response = $gateway->send($message);
 
 // print response
 var_dump($response);
+```
+
+### Receive messages
+
+```
+use AndreasWeber\SMS\Core\Gateway;
+use AndreasWeber\SMS\Core\Gateway\Adapter\TextAnywhere;
+
+// create gateway
+$gateway = new Gateway(
+    new TextAnywhere('XXXXXXXX', 'XXXXXXXX'),
+    true
+);
+
+// receive messages
+$messages = $gateway->fetch('+49177123456789');
+
+// print messages
+var_dump($messages);
 ```
 
 ## Developer
