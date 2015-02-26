@@ -33,4 +33,16 @@ class Adapter extends AdapterAbstract
             'Successful'
         );
     }
+
+    /**
+     * Fetches all queued messages from gateway.
+     *
+     * @param string $number The number to fetch messages from
+     *
+     * @return Message[]
+     */
+    public function fetch($number)
+    {
+        return array();
+    }
 }
