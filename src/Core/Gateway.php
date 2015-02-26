@@ -51,6 +51,7 @@ class Gateway
         Assertion::boolean($state);
 
         $this->debugMode = $state;
+
         return $this;
     }
 
@@ -63,10 +64,7 @@ class Gateway
      */
     public function send(Message $message)
     {
-        return $this->adapter->send(
-            $message,
-            $this->debugMode
-        );
+        return $this->adapter->send($message, $this->debugMode);
     }
 
     /**

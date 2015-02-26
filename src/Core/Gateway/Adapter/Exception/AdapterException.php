@@ -9,8 +9,8 @@
  * with this source code in the file LICENSE.
  */
 
-namespace AndreasWeber\SMS\Core\Gateway;
+namespace AndreasWeber\SMS\Core\Gateway\Adapter\Exception;
 
-abstract class AdapterAbstract implements AdapterInterface
+class AdapterException extends \Exception
 {
 }

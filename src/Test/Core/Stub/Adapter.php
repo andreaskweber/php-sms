@@ -11,10 +11,10 @@
 
 namespace AndreasWeber\SMS\Test\Core\Stub;
 
-use AndreasWeber\SMS\Core\Gateway\AdapterAbstract;
+use AndreasWeber\SMS\Core\Gateway\AdapterInterface;
 use AndreasWeber\SMS\Core\Message;
 
-class Adapter extends AdapterAbstract
+class Adapter implements AdapterInterface
 {
     /**
      * Sends a message through the gateway.

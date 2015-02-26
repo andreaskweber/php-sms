@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace AndreasWeber\SMS\Core\Response;
+namespace AndreasWeber\SMS\Core\Gateway\Adapter\SMSTrade;
 
-class Code
+class ResponseCode
 {
     const ETABLISH_CONNECTION_TO_GATEWAY_FAILED = 'Can\'t etablish connection to gateway';
     const BAD_RECIPIENT = 'Bad recipient';

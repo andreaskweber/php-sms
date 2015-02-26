@@ -11,12 +11,13 @@
 
 namespace AndreasWeber\SMS\Core\Gateway\Adapter;
 
-use AndreasWeber\SMS\Core\Gateway\AdapterAbstract;
+use AndreasWeber\SMS\Core\Gateway\AdapterInterface;
 use AndreasWeber\SMS\Core\Message;
 use AndreasWeber\SMS\Core\Response;
+use AndreasWeber\SMS\Core\Gateway\Adapter\Exception\AdapterException;
 use Assert\Assertion;
 
-class TextAnywhere extends AdapterAbstract
+class TextAnywhere implements AdapterInterface
 {
     /**
      * WSDL Url
@@ -34,7 +35,7 @@ class TextAnywhere extends AdapterAbstract
     private $password;
 
     /**
-     * @var
+     * @var \SoapClient Soap client
      */
     private $soapClient;
 
@@ -103,7 +104,7 @@ class TextAnywhere extends AdapterAbstract
      * @param string $number The number to fetch messages from
      *
      * @return Message[]
-     * @throws Exception When fetching messages failed
+     * @throws AdapterException When fetching messages failed
      */
     public function fetch($number)
     {
@@ -121,7 +122,7 @@ class TextAnywhere extends AdapterAbstract
         }
 
         if ($meta['code'] !== 1) {
-            throw new Exception(
+            throw new AdapterException(
                 sprintf(
                     'An error occured while fetching messages: %s - %s',
                     $meta['code'],
@@ -132,7 +133,7 @@ class TextAnywhere extends AdapterAbstract
 
         $messages = array();
         foreach ($xml->SMSInbounds->InboundSMS as $sms) {
-            $dateTime = \DateTime::createFromFormat(
+            $time = \DateTime::createFromFormat(
                 'Y-m-d H:i:s',
                 (string)$sms->Date . ' ' . (string)$sms->Time
             );
@@ -140,11 +141,9 @@ class TextAnywhere extends AdapterAbstract
             $message = new Message(
                 (string)$sms->Destination,
                 (string)$sms->Originator,
-                (string)$sms->Body,
-                array(
-                    'timestamp' => $dateTime->getTimestamp()
-                )
+                (string)$sms->Body
             );
+            $message->setTime($time);
 
             $messages[] = $message;
         }

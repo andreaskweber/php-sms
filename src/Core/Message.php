@@ -14,6 +14,11 @@ namespace AndreasWeber\SMS\Core;
 class Message
 {
     /**
+     * @var \DateTime Time
+     */
+    private $time;
+
+    /**
      * @var string Recipient
      */
     private $to;
@@ -39,14 +44,39 @@ class Message
      * @param string $recipient   Recipient
      * @param string $sender      Sender
      * @param string $messageText Message text
-     * @param array  $options
+     * @param array  $options     Options
      */
     public function __construct($recipient, $sender, $messageText, array $options = array())
     {
+        $this->setTime(new \DateTime());
         $this->setTo($recipient);
         $this->setFrom($sender);
         $this->setMessageText($messageText);
         $this->setOptions($options);
+    }
+
+    /**
+     * Returns the time.
+     *
+     * @return \DateTime
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }
+
+    /**
+     * Sets the time.
+     *
+     * @param \DateTime $time
+     *
+     * @return $this
+     */
+    public function setTime(\DateTime $time)
+    {
+        $this->time = $time;
+
+        return $this;
     }
 
     /**
@@ -131,19 +161,9 @@ class Message
     }
 
     /**
-     * Returns the options.
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
      * Sets the options.
      *
-     * @param array $options
+     * @param array $options Options
      *
      * @return $this
      */
@@ -152,5 +172,15 @@ class Message
         $this->options = $options;
 
         return $this;
+    }
+
+    /**
+     * Returns the options.
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
     }
 }

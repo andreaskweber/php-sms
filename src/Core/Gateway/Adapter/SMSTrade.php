@@ -11,12 +11,13 @@
 
 namespace AndreasWeber\SMS\Core\Gateway\Adapter;
 
-use AndreasWeber\SMS\Core\Gateway\AdapterAbstract;
+use AndreasWeber\SMS\Core\Gateway\AdapterInterface;
 use AndreasWeber\SMS\Core\Message;
 use AndreasWeber\SMS\Core\Response;
-use AndreasWeber\SMS\Core\Response\Code;
+use AndreasWeber\SMS\Core\Gateway\Adapter\SMSTrade\ResponseCode;
+use AndreasWeber\SMS\Core\Gateway\Adapter\Exception\AdapterException;
 
-class SMSTrade extends AdapterAbstract
+class SMSTrade implements AdapterInterface
 {
     /**
      * Routes
@@ -110,11 +111,11 @@ class SMSTrade extends AdapterAbstract
      * @param string $number The number to fetch messages from
      *
      * @return null
-     * @throws Exception
+     * @throws AdapterException
      */
     public function fetch($number)
     {
-        throw new Exception('Fetching messages from SMSTrade-Gateway not supported.');
+        throw new AdapterException('Fetching messages from SMSTrade-Gateway not supported.');
     }
 
     /**
@@ -128,28 +129,28 @@ class SMSTrade extends AdapterAbstract
     {
         switch ($code) {
             case 0:
-                return Code::ETABLISH_CONNECTION_TO_GATEWAY_FAILED;
+                return ResponseCode::ETABLISH_CONNECTION_TO_GATEWAY_FAILED;
             case 10:
-                return Code::BAD_RECIPIENT;
+                return ResponseCode::BAD_RECIPIENT;
             case 20:
-                return Code::SENDER_IDENTIFIER_TOO_LONG;
+                return ResponseCode::SENDER_IDENTIFIER_TOO_LONG;
             case 30:
-                return Code::MESSAGE_TOO_LONG;
+                return ResponseCode::MESSAGE_TOO_LONG;
             case 31:
-                return Code::BAD_MESSAGE_TYPE_;
+                return ResponseCode::BAD_MESSAGE_TYPE_;
             case 40:
-                return Code::BAD_SMS_TYPE;
+                return ResponseCode::BAD_SMS_TYPE;
             case 50:
-                return Code::AUTHENTICATION_FAILED;
+                return ResponseCode::AUTHENTICATION_FAILED;
             case 60:
-                return Code::OUT_OF_CREDIT;
+                return ResponseCode::OUT_OF_CREDIT;
             case 80:
             case 90:
-                return Code::SMS_SENDING_FAILED;
+                return ResponseCode::SMS_SENDING_FAILED;
             case 100:
-                return Code::SMS_SENT_SUCCESSFULLY;
+                return ResponseCode::SMS_SENT_SUCCESSFULLY;
             default:
-                return Code::OTHER_ERROR;
+                return ResponseCode::OTHER_ERROR;
         }
     }
 }
